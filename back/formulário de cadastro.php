@@ -1,57 +1,33 @@
 <?php
-// Conectar ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "usuarios_db";
-
-// Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Capturar dados do formulário
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-    $confirmar_senha = $_POST['confirmar_senha'];
-    $tipo_conta = $_POST['tipo_conta'];
-
-    // Verificar se as senhas coincidem
-    if ($senha !== $confirmar_senha) {
-        echo "As senhas não coincidem!";
-    } else {
-        // Verificar se o email já está cadastrado
-        $sql = "SELECT * FROM usuarios WHERE email = '$email'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            echo "Este email já está cadastrado.";
-        } else {
-            // Criar senha hash
-            $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-
-            // Inserir no banco de dados
-            $sql = "INSERT INTO usuarios (nome, email, senha, tipo_conta) VALUES ('$nome', '$email', '$senha_hash', '$tipo_conta')";
-
-            if ($conn->query($sql) === TRUE) {
-                // Redirecionar para a página de login após o cadastro
-                header("Location: login.php");
-                exit();
-            } else {
-                echo "Erro ao cadastrar: " . $conn->error;
+require_once 'funcoes.php';
+$u=new funcoes("sql10750543", "sql10.freesqldatabase.com", "sql10750543", "tGXF33BwST");
+if(isset($_POST['nome'])){
+    $nome= addslashes($_POST['nome']);
+    $email= addslashes($_POST['email']);
+    $senha= addslashes($_POST['senha']);
+    $conf_Senha= addslashes($_POST['conf_Senha']);
+    $tipo_conta= addslashes($_POST['tipo_conta']);
+    if(!empty($nome) && !empty($email) && !empty($senha) && !empty($conf_Senha)&&!empty($tipo_conta)){
+        if($senha==$conf_Senha){
+            if(!$u->cadastro($nome, $email, $senha)){
+                ?>
+                    <div class="texto">Email já cadastrado!</div>
+                <?php
             }
         }
+        else{
+            ?>
+                    <div class="texto">As duas senhas não conferem, tente novamente!</div>
+            <?php
+        }
+    }
+    else{
+        ?>
+        <div class="texto">Preencha todos os campos!</div>
+        <?php
     }
 }
-
-$conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

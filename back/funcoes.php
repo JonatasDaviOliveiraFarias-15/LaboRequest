@@ -11,4 +11,21 @@ class funcoes {
             exit();
         }
     }
+    public function cadastro($nome, $email, $senha, $tipo_conta){
+        $cmd=$this->pdo->query("SELECT id FROM usuarios WHERE email = '$email'");
+        if( $cmd->rowCount() > 0){
+        return false;
+    }
+        else{this->pdo-> query("INSERT INTO usuarios (nome, email, senha, tipo_conta) VALUES ('$nome', '$email', '$senha', '$tipo_conta')");
+        return true; }
+}
+    public function login($email, $senha) {
+        session_start();
+        $cmd = $this->pdo->query("SELECT id FROM usuarios WHERE email = '$email' AND senha='$senha'");
+        if( $cmd->rowCount() > 0){
+            $dado = $cmd->fetch(PDO::FETCH_ASSOC);
+            $_SESSION["id"] = $dado["id"];
+            return true;
+        }    
+}
 }
