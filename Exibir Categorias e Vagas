@@ -1,0 +1,36 @@
+<?php
+include 'db_connect.php';
+
+$sql = "SELECT * FROM categories";
+$result = $conn->query($sql);
+
+echo "<form method='GET' action=''>";
+echo "<select name='category_id' onchange='this.form.submit()'>";
+echo "<option value=''>Selecione uma Categoria</option>";
+
+while ($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+}
+
+echo "</select>";
+echo "</form>";
+
+// Exibir vagas de acordo com a categoria selecionada
+if (isset($_GET['category_id']) && !empty($_GET['category_id'])) {
+  $category_id = $_GET['category_id'];
+
+  // Consultar as vagas da categoria selecionada
+  $sql_jobs = "SELECT * FROM jobs WHERE category_id = $category_id";
+  $result_jobs = $conn->query($sql_jobs);
+
+  if ($result_jobs->num_rows > 0) {
+    while ($job = $result_jobs->fetch_assoc()) {
+      echo "<h3>" . $job['title'] . "</h3>";
+      echo "<p>" . $job['description'] . "</p>";
+      echo "<hr>";
+    }
+  } else {
+    echo "Nenhuma vaga encontrada para esta categoria.";
+  }
+}
+?>
