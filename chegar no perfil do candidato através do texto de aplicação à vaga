@@ -1,0 +1,107 @@
+[18:09, 30/01/2025] ...: <!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Perfil do Candidato</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 150px; }
+        input[type="submit"] { padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: darkblue; }
+    </style>
+</head>
+<body>
+
+    <h2>Análise de Perfil do Candidato</h2>
+    <p>Insira seu texto de candidatura abaixo para análise:</p>
+
+    <form method="post" action="analisar.php">
+        <textarea name="textoCandidato" placeholder="Digite aqui seu texto de aplicação..." required></textarea><br><br>
+        <input type="submit" value="Analisar Perfil">
+    </form>
+
+</body>
+</html>
+[18:10, 30/01/2025] ...: <?php
+function analisarCandidato($texto) {
+    
+    $experiencia = ['anos de experiência', 'trabalhei em', 'experiência em', 'atuei como', 'empresa', 'projeto'];
+    $habilidades = ['PHP', 'JavaScript', 'MySQL', 'HTML', 'CSS', 'framework', 'Laravel', 'Python', 'React', 'Node.js', 'comunicação', 'trabalho em equipe'];
+    $educacao = ['graduação', 'formado em', 'bacharel', 'mestre', 'certificação', 'curso técnico', 'especialização'];
+    $motivacao = ['interesse em', 'desejo contribuir', 'objetivo', 'motivado por', 'apaixonado por', 'entusiasmo'];
+
+    $perfil = [
+        'Experiência' => [],
+        'Habilidades' => [],
+        'Educação' => [],
+        'Motivação' => []
+    ];
+
+
+    foreach ($experiencia as $palavra) {
+        if (stripos($texto, $palavra) !== false) {
+            $perfil['Experiência'][] = $palavra;
+        }
+    }
+    foreach ($habilidades as $palavra) {
+        if (stripos($texto, $palavra) !== false) {
+            $perfil['Habilidades'][] = $palavra;
+        }
+    }
+    foreach ($educacao as $palavra) {
+        if (stripos($texto, $palavra) !== false) {
+            $perfil['Educação'][] = $palavra;
+        }
+    }
+    foreach ($motivacao as $palavra) {
+        if (stripos($texto, $palavra) !== false) {
+            $perfil['Motivação'][] = $palavra;
+        }
+    }
+
+    return $perfil;
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $textoCandidato = $_POST['textoCandidato'];
+    $perfilCandidato = analisarCandidato($textoCandidato);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da Análise</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { color: blue; }
+        .resultado { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Resultado da Análise do Perfil</h2>
+    
+    <div class="resultado">
+        <h3>Experiência:</h3>
+        <p><?php echo !empty($perfilCandidato['Experiência']) ? implode(", ", $perfilCandidato['Experiência']) : "Nenhuma experiência detectada."; ?></p>
+
+        <h3>Habilidades:</h3>
+        <p><?php echo !empty($perfilCandidato['Habilidades']) ? implode(", ", $perfilCandidato['Habilidades']) : "Nenhuma habilidade detectada."; ?></p>
+
+        <h3>Educação:</h3>
+        <p><?php echo !empty($perfilCandidato['Educação']) ? implode(", ", $perfilCandidato['Educação']) : "Nenhuma formação detectada."; ?></p>
+
+        <h3>Motivação:</h3>
+        <p><?php echo !empty($perfilCandidato['Motivação']) ? implode(", ", $perfilCandidato['Motivação']) : "Nenhuma motivação detectada."; ?></p>
+    </div>
+
+    <br>
+    <a href="index.php">Voltar</a>
+
+</body>
+</html>
