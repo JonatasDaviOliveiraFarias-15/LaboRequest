@@ -1,0 +1,9 @@
+<?php
+// Verifica se a categoria foi selecionada
+if (isset($_POST['categoria']) && !empty($_POST['categoria'])) {
+    $categoria = $_POST['categoria'];
+    echo "A categoria selecionada foi: " . $categoria;
+} else {
+    echo "Nenhuma categoria foi selecionada.";
+}
+?>
