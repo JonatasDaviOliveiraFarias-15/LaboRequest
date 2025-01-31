@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Categoria de Vaga</title>
+</head>
+<body>
+
+    <h1>Selecione a Categoria de Vaga</h1>
+    <form action="processa_vaga.php" method="post">
+        <label for="categoria">Categoria de Vaga:</label>
+        <select name="categoria" id="categoria" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="Tecnico">Técnico</option>
+            <option value="Administrativo">Administrativo</option>
+            <option value="Comercial">Comercial</option>
+            <option value="TI">Tecnologia da Informação</option>
+            <option value="Financeiro">Financeiro</option>
+        </select>
+
+        <br><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+</body>
+</html>
