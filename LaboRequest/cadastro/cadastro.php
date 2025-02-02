@@ -53,7 +53,7 @@ $u=new funcoes("postgres", "aws-0-sa-east-1.pooler.supabase.com", "postgres.hnow
             </div>
           </div>
         <div class="Frame5">
-            <input type="submit" value="Entrar">
+            <input type="submit" value="Criar Conta">
         </div>
         </form>
         <div class="ntc">Já tem uma conta? Faça <a href="../login/login.php">Login</a></div>
