@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         </div>
         <nav class="nav">
-            <a href="">Minhas Vagas</a>
-            <a href="../pesquisa/pesquisa.php">Encontrar Trabalhos</a>
+            <a href="">Ver Candidatos</a>
+            <a href="../cadastroVagas/cadastroVagas.php">Adicionar Vagas</a>
             <a href="../perfil/perfil.php">Editar Perfil</a>
             <a href="../deslogar.php">Deslogar</a>
         </nav>
