@@ -35,7 +35,7 @@ $tipo=$u->buscarTipoConta($id);
         <div class="container">
             <nav class="nav">
                 <a href=""><div class="logo"><img src="logo2.png" alt="Logo2" width="40px" height="40px"><img src="logo.png" alt="Logo"></div></a>
-                <a href="../LaboRequest/login/login.php">Minhas Vagas</a>
+                <a href="../LaboRequest/verCandidatos/verCandidatos.php">Ver Candidatos</a>
                 <a href="../LaboRequest/cadastroVagas/cadastroVagas.php">Adicionar Vagas</a>
                 <a href="../LaboRequest/perfil/perfil.php">Editar Perfil</a>
                 <a href="../LaboRequest/deslogar.php">Deslogar</a>
@@ -74,7 +74,7 @@ $tipo=$u->buscarTipoConta($id);
 
     <section class="faq">
         <div class="container">
-            <h2>Dúvidas <span>Frequentes</span></h2>
+            <h2>Diretos e <span>Deveres</span></h2>
             <ul class="faq-list">
                 <li>
                     Direitos do Empregado <span class="arrow">&#x25BC;</span>
