@@ -205,7 +205,7 @@ if ($foto) {
         <hr>
         <div class="form-group">
             <label for="foto">Foto</label>
-            <input type="file" id="foto" name="foto" accept=".jpg">
+            <input type="file" id="foto" name="foto" accept=".jpg, .png">
         </div>
 
         <button type="submit" class="btn-atualizar">Atualizar perfil</button>
