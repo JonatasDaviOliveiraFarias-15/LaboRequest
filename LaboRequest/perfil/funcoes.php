@@ -73,21 +73,26 @@ class funcoes {
     }
     
     public function enviarDados($id, $nome, $email, $genero, $ano_nascimento, $telefone, $celular, $cursos, $idiomas, $competencias, $formacao_academica, $experiencias) {
-    $this->pdo->query("UPDATE perfil SET 
-        genero='$genero',
-        nascimento='$ano_nascimento',
-        telefone='$telefone',
-        celular='$celular',
-        cr='$cursos',
-        if='$idiomas',
-        dc='$competencias',
-        fa='$formacao_academica',
-        experiencias='$experiencias'
-        WHERE id_user='$id'");
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM perfil WHERE id_user = ?");
+        $stmt->execute([$id]);
+        $existe = $stmt->fetchColumn();
     
-    $this->pdo->query("UPDATE contas SET nome='$nome', email='$email' WHERE id='$id'");
+        if ($existe) {
+            $stmt = $this->pdo->prepare("UPDATE perfil SET 
+                genero = ?, nascimento = ?, telefone = ?, celular = ?, 
+                cr = ?, ifds = ?, dc = ?, fa = ?, experiencias = ? 
+                WHERE id_user = ?");
+            $stmt->execute([$genero, $ano_nascimento, $telefone, $celular, $cursos, $idiomas, $competencias, $formacao_academica, $experiencias, $id]);
     
+            $stmt = $this->pdo->prepare("UPDATE contas SET nome = ?, email = ? WHERE id = ?");
+            $stmt->execute([$nome, $email, $id]);
+        } else {
+            $stmt = $this->pdo->prepare("INSERT INTO perfil (id_user, genero, nascimento, telefone, celular, cr, ifds, dc, fa, experiencias) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$id, $genero, $ano_nascimento, $telefone, $celular, $cursos, $idiomas, $competencias, $formacao_academica, $experiencias]);
+        }
     }
+
     
     public function atualizarFoto($id, $caminhoArquivo) {
     $sql = "UPDATE perfil SET foto = :foto WHERE id_user = :id";
