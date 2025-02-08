@@ -59,7 +59,7 @@ $u = new funcoes("postgres", "aws-0-sa-east-1.pooler.supabase.com", "postgres.hn
 
     <section class="faq">
         <div class="container">
-            <h2>Dúvidas <span>Frequentes</span></h2>
+            <h2>Direitos e Dev<span>eres Trabalhistas</span></h2>
             <ul class="faq-list">
                 <li>
                     Direitos do Empregado <span class="arrow">&#x25BC;</span>
