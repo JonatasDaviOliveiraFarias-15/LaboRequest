@@ -21,6 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     $resultado = $u->buscarInfoVagas();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vaga'])) {
+    $idVaga = $_POST['vaga'][0]; // Como vaga[] é um array, pegamos o primeiro valor
+    $u->candidatarVaga($id, $idVaga);
+    header("Location: ".$_SERVER['PHP_SELF']); // Atualiza a página para refletir a mudança
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
