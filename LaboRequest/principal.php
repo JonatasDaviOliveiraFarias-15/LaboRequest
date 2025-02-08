@@ -74,7 +74,7 @@ $tipo=$u->buscarTipoConta($id);
 
     <section class="faq">
         <div class="container">
-            <h2>Diretos e <span>Deveres</span></h2>
+            <h2>Direitos e Dev<span>eres Trabalhistas</span></h2>
             <ul class="faq-list">
                 <li>
                     Direitos do Empregado <span class="arrow">&#x25BC;</span>
