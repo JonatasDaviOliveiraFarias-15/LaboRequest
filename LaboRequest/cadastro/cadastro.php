@@ -29,7 +29,7 @@ $u=new funcoes("postgres", "aws-0-sa-east-1.pooler.supabase.com", "postgres.hnow
           </div>
           <div class="Frame4">
             <div class="Frame1">
-              <div class="cpf"><input type="text" placeholder="CPF" name="cpf" id="cpf"></div>
+              <div class="cpf"><input type="text" placeholder="CPF/CNPJ" name="cpf" id="cpf"></div>
             </div>
           </div>
           <div class="Frame3">
